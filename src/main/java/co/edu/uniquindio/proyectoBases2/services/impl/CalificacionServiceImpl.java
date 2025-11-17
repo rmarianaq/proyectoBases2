@@ -23,15 +23,15 @@ public class CalificacionServiceImpl implements CalificacionService {
     @Override
     public Calificacion guardar(Calificacion c) {
 
-        c.setFecha_registro(LocalDateTime.now());
+        c.setFechaRegistro(LocalDateTime.now());
         Calificacion guardada = repo.save(c);
 
-        Double definitiva = repo.calcularDefinitiva(c.getId_matricula_detalle());
+        Double definitiva = repo.calcularDefinitiva(c.getIdMatriculaDetalle());
 
         NotaDefinitiva nd = new NotaDefinitiva();
-        nd.setId_matricula_detalle(c.getId_matricula_detalle());
-        nd.setFecha_calculo(LocalDateTime.now());
-        nd.setNota_definitiva(definitiva);
+        nd.setIdMatriculaDetalle(c.getIdMatriculaDetalle());
+        nd.setFechaCalculo(LocalDateTime.now());
+        nd.setNotaDefinitiva(definitiva);
         nd.setAprobada(definitiva >= 3 ? "S" : "N");
         nd.setConsolidada("N");
 

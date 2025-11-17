@@ -66,35 +66,35 @@ public class MatriculaServiceImpl implements MatriculaService {
     public Matricula crearMatricula(Matricula m) {
 
         // validar periodo
-        Periodo p = periodoRepo.findById(m.getId_periodo())
+        Periodo p = periodoRepo.findById(m.getIdPeriodo())
                 .orElseThrow(() -> new BusinessException("Periodo no existe"));
 
         LocalDate hoy = LocalDate.now();
-        LocalDate inicio = p.getFecha_inicio_matriculas().toLocalDate();
-        LocalDate fin = p.getFecha_fin_matriculas().toLocalDate();
+        LocalDate inicio = p.getFechaInicioMatriculas().toLocalDate();
+        LocalDate fin = p.getFechaFinMatriculas().toLocalDate();
 
         if (hoy.isBefore(inicio) || hoy.isAfter(fin)) {
             throw new BusinessException("Fuera de la ventana de matrícula");
         }
 
         // validar estudiante
-        Estudiante est = estudianteRepo.findById(m.getId_estudiante())
+        Estudiante est = estudianteRepo.findById(m.getIdEstudiante())
                 .orElseThrow(() -> new BusinessException("Estudiante no existe"));
 
         // datos base
-        m.setFecha_matricula(LocalDateTime.now());
-        m.setEstado_matricula("CREADA");
+        m.setFechaMatricula(LocalDateTime.now());
+        m.setEstadoMatricula("CREADA");
 
         Matricula matriculaGuardada = matriculaRepo.save(m);
 
         auditoriaService.registrar(
                 "CREAR_MATRICULA",
-                "Matrícula creada ID=" + matriculaGuardada.getId_matricula(),
-                est.getCodigo_estudiante()
+                "Matrícula creada ID=" + matriculaGuardada.getIdMatricula(),
+                est.getCodigoEstudiante()
         );
 
         // 1er semestre → inscribir asignaturas base
-        if (est.getSemestre_actual() != null && est.getSemestre_actual() == 1) {
+        if (est.getSemestreActual() != null && est.getSemestreActual() == 1) {
             inscribirPrimerSemestreYPerdidas(matriculaGuardada, est);
         } else {
             reinscribirPerdidasSiCorresponde(matriculaGuardada, est);
@@ -114,22 +114,22 @@ public class MatriculaServiceImpl implements MatriculaService {
         Matricula m = matriculaRepo.findById(idMatricula)
                 .orElseThrow(() -> new BusinessException("Matrícula no encontrada"));
 
-        Estudiante e = estudianteRepo.findById(m.getId_estudiante())
+        Estudiante e = estudianteRepo.findById(m.getIdEstudiante())
                 .orElseThrow(() -> new BusinessException("Estudiante no encontrado"));
 
         Grupo g = grupoRepo.findById(idGrupo)
                 .orElseThrow(() -> new BusinessException("Grupo no existe"));
 
-        Asignatura a = asignaturaRepo.findById(g.getId_asignatura())
+        Asignatura a = asignaturaRepo.findById(g.getIdAsignatura())
                 .orElseThrow(() -> new BusinessException("Asignatura inválida"));
 
         // Validar prerrequisitos
-        boolean ok = prerrequisitoService.cumplePrerrequisitos(e.getId_estudiante(), a.getId_asignatura());
+        boolean ok = prerrequisitoService.cumplePrerrequisitos(e.getIdEstudiante(), a.getIdAsignatura());
         if (!ok)
             throw new BusinessException("No cumple prerrequisitos");
 
         // Validar límite de créditos por riesgo
-        int limite = obtenerLimiteCreditos(e.getId_estudiante(), m.getId_periodo());
+        int limite = obtenerLimiteCreditos(e.getIdEstudiante(), m.getIdPeriodo());
         Integer sumCred = detalleRepo.totalCreditos(idMatricula);
         sumCred = sumCred == null ? 0 : sumCred;
 
@@ -143,8 +143,8 @@ public class MatriculaServiceImpl implements MatriculaService {
         // Choque
         List<MatriculaDetalle> detalles = detalleRepo.detalles(idMatricula);
         for (MatriculaDetalle md : detalles) {
-            if ("ACTIVA".equalsIgnoreCase(md.getEstado_inscripcion())) {
-                if (grupoService.hayChoque(md.getId_grupo(), idGrupo)) {
+            if ("ACTIVA".equalsIgnoreCase(md.getEstadoInscripcion())) {
+                if (grupoService.hayChoque(md.getIdGrupo(), idGrupo)) {
                     throw new BusinessException("Choque de horario");
                 }
             }
@@ -152,20 +152,20 @@ public class MatriculaServiceImpl implements MatriculaService {
 
         // Registrar detalle
         MatriculaDetalle det = new MatriculaDetalle();
-        det.setId_matricula(idMatricula);
-        det.setId_grupo(idGrupo);
-        det.setEstado_inscripcion("ACTIVA");
-        det.setIntento_numero(1);
+        det.setIdMatricula(idMatricula);
+        det.setIdGrupo(idGrupo);
+        det.setEstadoInscripcion("ACTIVA");
+        det.setIntentoNumero(1);
         detalleRepo.save(det);
 
         // Actualizar cupo
-        g.setCupo_ocupado(g.getCupo_ocupado() == null ? 1 : g.getCupo_ocupado() + 1);
+        g.setCupoOcupado(g.getCupoOcupado() == null ? 1 : g.getCupoOcupado() + 1);
         grupoRepo.save(g);
 
         auditoriaService.registrar(
                 "AGREGAR_ASIGNATURA",
                 "Grupo " + idGrupo + " agregado a matrícula " + idMatricula,
-                e.getCodigo_estudiante()
+                e.getCodigoEstudiante()
         );
 
         return "Asignatura agregada correctamente";
@@ -180,13 +180,13 @@ public class MatriculaServiceImpl implements MatriculaService {
     public int obtenerLimiteCreditos(Integer idEstudiante, Integer idPeriodo) {
 
         Optional<HistorialRiesgoEstudiante> ultimo =
-                historialRiesgoRepo.findTopByIdEstudianteOrderByIdHistorialRiesgoDesc(idEstudiante);
+                historialRiesgoRepo.buscarUltimoPorEstudiante(idEstudiante);
 
         if (ultimo.isPresent()) {
-            Integer nivel = ultimo.get().getId_nivel_riesgo();
+            Integer nivel = ultimo.get().getIdNivelRiesgo();
             Optional<NivelRiesgoAcademico> n = nivelRiesgoRepo.findById(nivel);
-            if (n.isPresent() && n.get().getCreditos_maximos() != null)
-                return n.get().getCreditos_maximos();
+            if (n.isPresent() && n.get().getCreditosMaximos() != null)
+                return n.get().getCreditosMaximos();
         }
 
         // default
@@ -202,11 +202,11 @@ public class MatriculaServiceImpl implements MatriculaService {
 
         // 1. Traer todas las asignaturas del programa
         List<Asignatura> asignaturasPrograma =
-                asignaturaRepo.asignaturasPorPrograma(est.getId_programa());
+                asignaturaRepo.asignaturasPorPrograma(est.getIdPrograma());
 
         // 2. Filtrar SOLO las de primer semestre
         List<Asignatura> iniciales = asignaturasPrograma.stream()
-                .filter(a -> a.getSemestre_sugerido() != null && a.getSemestre_sugerido() == 1)
+                .filter(a -> a.getSemestreSugerido() != null && a.getSemestreSugerido() == 1)
                 .toList();
 
         if (iniciales.isEmpty()) {
@@ -216,20 +216,20 @@ public class MatriculaServiceImpl implements MatriculaService {
         // 3. Recorrer asignaturas de primer semestre
         for (Asignatura a : iniciales) {
 
-            List<Grupo> grupos = grupoRepo.gruposPorAsignatura(a.getId_asignatura());
+            List<Grupo> grupos = grupoRepo.gruposPorAsignatura(a.getIdAsignatura());
 
             Grupo grupoValido = grupos.stream()
-                    .filter(g -> g.getId_periodo().equals(matricula.getId_periodo()))
+                    .filter(g -> g.getIdPeriodo().equals(matricula.getIdPeriodo()))
                     .findFirst()
                     .orElse(null);
 
             if (grupoValido == null)
                 throw new BusinessException(
-                        "No hay grupo disponible en el periodo actual para " + a.getNombre_asignatura()
+                        "No hay grupo disponible en el periodo actual para " + a.getNombreAsignatura()
                 );
 
             // 4. Inscribir asignatura
-            agregarAsignatura(matricula.getId_matricula(), grupoValido.getId_grupo());
+            agregarAsignatura(matricula.getIdMatricula(), grupoValido.getIdGrupo());
         }
 
         // 5. Reinscribir perdidas si aplica
@@ -242,11 +242,11 @@ public class MatriculaServiceImpl implements MatriculaService {
     // ------------------------------------------------------------
     private void reinscribirPerdidasSiCorresponde(Matricula matricula, Estudiante est) {
 
-        Integer periodoActual = matricula.getId_periodo();
+        Integer periodoActual = matricula.getIdPeriodo();
         Integer periodoAnterior = periodoActual - 1;
 
         List<Integer> perdidas =
-                reinscripcionService.obtenerMateriasPerdidas(est.getId_estudiante(), periodoAnterior);
+                reinscripcionService.obtenerMateriasPerdidas(est.getIdEstudiante(), periodoAnterior);
 
         if (perdidas == null || perdidas.isEmpty())
             return;
@@ -256,7 +256,7 @@ public class MatriculaServiceImpl implements MatriculaService {
             List<Grupo> grupos = grupoRepo.gruposPorAsignatura(idAsignatura);
 
             Grupo grupoParaInscribir = grupos.stream()
-                    .filter(g -> g.getId_periodo().equals(matricula.getId_periodo()))
+                    .filter(g -> g.getIdPeriodo().equals(matricula.getIdPeriodo()))
                     .findFirst()
                     .orElse(null);
 
@@ -264,20 +264,20 @@ public class MatriculaServiceImpl implements MatriculaService {
                 auditoriaService.registrar(
                         "REINSCRIPCION_SIN_GRUPO",
                         "No hay grupo para asignatura " + idAsignatura,
-                        est.getCodigo_estudiante()
+                        est.getCodigoEstudiante()
                 );
                 continue;
             }
 
             try {
-                agregarAsignatura(matricula.getId_matricula(), grupoParaInscribir.getId_grupo());
+                agregarAsignatura(matricula.getIdMatricula(), grupoParaInscribir.getIdGrupo());
 
             } catch (BusinessException ex) {
                 auditoriaService.registrar(
                         "REINSCRIPCION_FALLIDA",
                         "No se pudo reinscribir asignatura " + idAsignatura +
                         " -> " + ex.getMessage(),
-                        est.getCodigo_estudiante()
+                        est.getCodigoEstudiante()
                 );
             }
         }

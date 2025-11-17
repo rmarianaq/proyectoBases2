@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,18 +16,24 @@ public class CancelacionAsignatura {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_cancelacion;
+    @Column(name = "id_cancelacion")
+    private Integer idCancelacion;
 
-    private Integer id_matricula_detalle;
+    @Column(name = "id_matricula_detalle")
+    private Integer idMatriculaDetalle;
 
-    private LocalDateTime fecha_cancelacion;
+    @Column(name = "fecha_cancelacion")
+    private LocalDateTime fechaCancelacion;
+
+    @Column(name = "motivo")
     private String motivo;
 
     @Builder
-    public CancelacionAsignatura(Integer id_cancelacion, Integer id_matricula_detalle, LocalDateTime fecha_cancelacion, String motivo) {
-        this.id_cancelacion = id_cancelacion;
-        this.id_matricula_detalle = id_matricula_detalle;
-        this.fecha_cancelacion = fecha_cancelacion;
+    public CancelacionAsignatura(Integer idCancelacion, Integer idMatriculaDetalle,
+                                 LocalDateTime fechaCancelacion, String motivo) {
+        this.idCancelacion = idCancelacion;
+        this.idMatriculaDetalle = idMatriculaDetalle;
+        this.fechaCancelacion = fechaCancelacion;
         this.motivo = motivo;
     }
 }

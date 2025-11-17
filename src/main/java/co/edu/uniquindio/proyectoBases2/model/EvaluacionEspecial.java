@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -14,29 +15,50 @@ public class EvaluacionEspecial {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_evaluacion_especial;
+    @Column(name = "id_evaluacion_especial")
+    private Integer idEvaluacionEspecial;
 
-    private Integer id_matricula_detalle;
-    private Integer id_tipo_evaluacion;
-    private LocalDateTime fecha_examen;
+    @Column(name = "id_matricula_detalle")
+    private Integer idMatriculaDetalle;
+
+    @Column(name = "id_tipo_evaluacion")
+    private Integer idTipoEvaluacion;
+
+    @Column(name = "fecha_examen")
+    private LocalDateTime fechaExamen;
+
+    @Column(name = "costo")
     private Double costo;
+
+    @Column(name = "pagado")
     private String pagado;
-    private LocalDateTime fecha_pago;
-    private Double nota_obtenida;
-    private LocalDateTime fecha_registro_nota;
+
+    @Column(name = "fecha_pago")
+    private LocalDateTime fechaPago;
+
+    @Column(name = "nota_obtenida")
+    private Double notaObtenida;
+
+    @Column(name = "fecha_registro_nota")
+    private LocalDateTime fechaRegistroNota;
+
+    @Column(name = "observaciones")
     private String observaciones;
 
     @Builder
-    public EvaluacionEspecial(Integer id_evaluacion_especial, Integer id_matricula_detalle, Integer id_tipo_evaluacion, LocalDateTime fecha_examen, Double costo, String pagado, LocalDateTime fecha_pago, Double nota_obtenida, LocalDateTime fecha_registro_nota, String observaciones) {
-        this.id_evaluacion_especial = id_evaluacion_especial;
-        this.id_matricula_detalle = id_matricula_detalle;
-        this.id_tipo_evaluacion = id_tipo_evaluacion;
-        this.fecha_examen = fecha_examen;
+    public EvaluacionEspecial(Integer idEvaluacionEspecial, Integer idMatriculaDetalle, Integer idTipoEvaluacion,
+                              LocalDateTime fechaExamen, Double costo, String pagado, LocalDateTime fechaPago,
+                              Double notaObtenida, LocalDateTime fechaRegistroNota, String observaciones) {
+
+        this.idEvaluacionEspecial = idEvaluacionEspecial;
+        this.idMatriculaDetalle = idMatriculaDetalle;
+        this.idTipoEvaluacion = idTipoEvaluacion;
+        this.fechaExamen = fechaExamen;
         this.costo = costo;
         this.pagado = pagado;
-        this.fecha_pago = fecha_pago;
-        this.nota_obtenida = nota_obtenida;
-        this.fecha_registro_nota = fecha_registro_nota;
+        this.fechaPago = fechaPago;
+        this.notaObtenida = notaObtenida;
+        this.fechaRegistroNota = fechaRegistroNota;
         this.observaciones = observaciones;
     }
 }

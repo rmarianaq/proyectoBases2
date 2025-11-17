@@ -29,7 +29,7 @@ public class AsignaturaController {
 
     @PutMapping("/{id}")
     public Asignatura actualizar(@PathVariable Integer id, @RequestBody Asignatura a) {
-        a.setId_asignatura(id);
+        a.setIdAsignatura(id);
         return service.actualizar(a);
     }
 }

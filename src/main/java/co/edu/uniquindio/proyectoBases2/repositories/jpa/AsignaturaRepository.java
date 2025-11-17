@@ -10,7 +10,7 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Integer>
 
     @Query("""
             SELECT a FROM Asignatura a
-            WHERE a.id_programa = :idPrograma
+            WHERE a.idPrograma = :idPrograma
             """)
     List<Asignatura> asignaturasPorPrograma(Integer idPrograma);
 }

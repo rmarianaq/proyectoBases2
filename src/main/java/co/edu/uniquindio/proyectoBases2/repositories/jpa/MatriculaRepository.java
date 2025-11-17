@@ -10,7 +10,7 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
 
     @Query("""
             SELECT m FROM Matricula m
-            WHERE m.id_estudiante = :idEstudiante AND m.id_periodo = :idPeriodo
+            WHERE m.idEstudiante = :idEstudiante AND m.idPeriodo = :idPeriodo
             """)
     Optional<Matricula> buscarMatriculaEstudiante(Integer idEstudiante, Integer idPeriodo);
 }

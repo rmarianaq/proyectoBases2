@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,18 +14,28 @@ public class MatriculaDetalle {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_matricula_detalle;
-    private Integer id_matricula;
-    private Integer id_grupo;
-    private String estado_inscripcion;
-    private Integer intento_numero;
+    @Column(name = "id_matricula_detalle")
+    private Integer idMatriculaDetalle;
+
+    @Column(name = "id_matricula")
+    private Integer idMatricula;
+
+    @Column(name = "id_grupo")
+    private Integer idGrupo;
+
+    @Column(name = "estado_inscripcion")
+    private String estadoInscripcion;
+
+    @Column(name = "intento_numero")
+    private Integer intentoNumero;
 
     @Builder
-    public MatriculaDetalle(Integer id_matricula_detalle, Integer id_matricula, Integer id_grupo, String estado_inscripcion, Integer intento_numero) {
-        this.id_matricula_detalle = id_matricula_detalle;
-        this.id_matricula = id_matricula;
-        this.id_grupo = id_grupo;
-        this.estado_inscripcion = estado_inscripcion;
-        this.intento_numero = intento_numero;
+    public MatriculaDetalle(Integer idMatriculaDetalle, Integer idMatricula, Integer idGrupo, String estadoInscripcion,
+                            Integer intentoNumero) {
+        this.idMatriculaDetalle = idMatriculaDetalle;
+        this.idMatricula = idMatricula;
+        this.idGrupo = idGrupo;
+        this.estadoInscripcion = estadoInscripcion;
+        this.intentoNumero = intentoNumero;
     }
 }

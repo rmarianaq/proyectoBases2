@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -14,21 +15,32 @@ public class HorarioGrupo {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_horario;
+    @Column(name = "id_horario")
+    private Integer idHorario;
 
-    private Integer id_grupo;
-    private Integer id_salon;
-    private String dia_semana;
-    private String hora_inicio;
-    private String hora_fin;
+    @Column(name = "id_grupo")
+    private Integer idGrupo;
+
+    @Column(name = "id_salon")
+    private Integer idSalon;
+
+    @Column(name = "dia_semana")
+    private String diaSemana;
+
+    @Column(name = "hora_inicio")
+    private String horaInicio;
+
+    @Column(name = "hora_fin")
+    private String horaFin;
 
     @Builder
-    public HorarioGrupo(Integer id_horario, Integer id_grupo, Integer id_salon, String dia_semana, String hora_inicio, String hora_fin) {
-        this.id_horario = id_horario;
-        this.id_grupo = id_grupo;
-        this.id_salon = id_salon;
-        this.dia_semana = dia_semana;
-        this.hora_inicio = hora_inicio;
-        this.hora_fin = hora_fin;
+    public HorarioGrupo(Integer idHorario, Integer idGrupo, Integer idSalon,
+                        String diaSemana, String horaInicio, String horaFin) {
+        this.idHorario = idHorario;
+        this.idGrupo = idGrupo;
+        this.idSalon = idSalon;
+        this.diaSemana = diaSemana;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
     }
 }

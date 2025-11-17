@@ -21,17 +21,17 @@ public class ReglaEvaluacionService {
     public ReglaEvaluacion crear(ReglaEvaluacion r) {
 
         // 1. validar grupo existe
-        if (!grupoRepo.existsById(r.getId_grupo()))
+        if (!grupoRepo.existsById(r.getIdGrupo()))
             throw new RuntimeException("El grupo no existe.");
 
         // 2. validar porcentaje total
-        Double total = repo.sumaPorcentajes(r.getId_grupo());
+        Double total = repo.sumaPorcentajes(r.getIdGrupo());
         if (total == null) total = 0.0;
         if (total + r.getPorcentaje() > 100.0)
             throw new RuntimeException("Los porcentajes superan 100%.");
 
         // 3. validar orden
-        if (repo.existsByIdGrupoAndOrdenItem(r.getId_grupo(), r.getOrden_item()))
+        if (repo.existsByIdGrupoAndOrdenItem(r.getIdGrupo(), r.getOrdenItem()))
             throw new RuntimeException("El orden del ítem ya está asignado.");
 
         return repo.save(r);

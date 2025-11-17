@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,23 +16,37 @@ public class NotaDefinitiva {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_nota_definitiva;
+    @Column(name = "id_nota_definitiva")
+    private Integer idNotaDefinitiva;
 
-    private Integer id_asignatura;
-    private Integer id_matricula_detalle;
-    private Double nota_definitiva;
+    @Column(name = "id_asignatura")
+    private Integer idAsignatura;
+
+    @Column(name = "id_matricula_detalle")
+    private Integer idMatriculaDetalle;
+
+    @Column(name = "nota_definitiva")
+    private Double notaDefinitiva;
+
+    @Column(name = "aprobada")
     private String aprobada;
-    private LocalDateTime fecha_calculo;
+
+    @Column(name = "fecha_calculo")
+    private LocalDateTime fechaCalculo;
+
+    @Column(name = "consolidada")
     private String consolidada;
 
     @Builder
-    public NotaDefinitiva(Integer id_nota_definitiva, Integer id_asignatura, Integer id_matricula_detalle, Double nota_definitiva, String aprobada, LocalDateTime fecha_calculo, String consolidada) {
-        this.id_nota_definitiva = id_nota_definitiva;
-        this.id_asignatura = id_asignatura;
-        this.id_matricula_detalle = id_matricula_detalle;
-        this.nota_definitiva = nota_definitiva;
+    public NotaDefinitiva(Integer idNotaDefinitiva, Integer idAsignatura, Integer idMatriculaDetalle,
+                          Double notaDefinitiva, String aprobada, LocalDateTime fechaCalculo,
+                          String consolidada) {
+        this.idNotaDefinitiva = idNotaDefinitiva;
+        this.idAsignatura = idAsignatura;
+        this.idMatriculaDetalle = idMatriculaDetalle;
+        this.notaDefinitiva = notaDefinitiva;
         this.aprobada = aprobada;
-        this.fecha_calculo = fecha_calculo;
+        this.fechaCalculo = fechaCalculo;
         this.consolidada = consolidada;
     }
 }

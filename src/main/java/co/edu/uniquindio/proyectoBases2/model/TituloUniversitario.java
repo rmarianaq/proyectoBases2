@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -16,23 +17,37 @@ public class TituloUniversitario {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_titulo;
+    @Column(name = "id_titulo")
+    private Integer idTitulo;
 
-    private Integer id_profesor;
-    private Integer id_nivel_educativo;
+    @Column(name = "id_profesor")
+    private Integer idProfesor;
+
+    @Column(name = "id_nivel_educativo")
+    private Integer idNivelEducativo;
+
+    @Column(name = "institucion")
     private String institucion;
-    private String titulo_obtenido;
-    private LocalDateTime fecha_obtencion;
+
+    @Column(name = "titulo_obtenido")
+    private String tituloObtenido;
+
+    @Column(name = "fecha_obtencion")
+    private LocalDateTime fechaObtencion;
+
+    @Column(name = "pais")
     private String pais;
 
     @Builder
-    public TituloUniversitario(Integer id_titulo, Integer id_profesor, Integer id_nivel_educativo, String institucion, String titulo_obtenido, LocalDateTime fecha_obtencion, String pais) {
-        this.id_titulo = id_titulo;
-        this.id_profesor = id_profesor;
-        this.id_nivel_educativo = id_nivel_educativo;
+    public TituloUniversitario(Integer idTitulo, Integer idProfesor, Integer idNivelEducativo, String institucion,
+                               String tituloObtenido, LocalDateTime fechaObtencion, String pais) {
+        this.idTitulo = idTitulo;
+        this.idProfesor = idProfesor;
+        this.idNivelEducativo = idNivelEducativo;
         this.institucion = institucion;
-        this.titulo_obtenido = titulo_obtenido;
-        this.fecha_obtencion = fecha_obtencion;
+        this.tituloObtenido = tituloObtenido;
+        this.fechaObtencion = fechaObtencion;
         this.pais = pais;
     }
 }
+

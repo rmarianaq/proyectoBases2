@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -14,18 +15,29 @@ public class NivelRiesgoAcademico {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_nivel_riesgo;
-    private Integer nivel_riesgo;
-    private String nombre_nivel;
+    @Column(name = "id_nivel_riesgo")
+    private Integer idNivelRiesgo;
+
+    @Column(name = "nivel_riesgo")
+    private Integer nivelRiesgo;
+
+    @Column(name = "nombre_nivel")
+    private String nombreNivel;
+
+    @Column(name = "descripcion")
     private String descripcion;
-    private Integer creditos_maximos;
+
+    @Column(name = "creditos_maximos")
+    private Integer creditosMaximos;
 
     @Builder
-    public NivelRiesgoAcademico(Integer id_nivel_riesgo, Integer nivel_riesgo, String nombre_nivel, String descripcion, Integer creditos_maximos) {
-        this.id_nivel_riesgo = id_nivel_riesgo;
-        this.nivel_riesgo = nivel_riesgo;
-        this.nombre_nivel = nombre_nivel;
+    public NivelRiesgoAcademico(Integer idNivelRiesgo, Integer nivelRiesgo, String nombreNivel,
+                                String descripcion, Integer creditosMaximos) {
+        this.idNivelRiesgo = idNivelRiesgo;
+        this.nivelRiesgo = nivelRiesgo;
+        this.nombreNivel = nombreNivel;
         this.descripcion = descripcion;
-        this.creditos_maximos = creditos_maximos;
+        this.creditosMaximos = creditosMaximos;
     }
 }
+

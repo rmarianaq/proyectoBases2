@@ -17,7 +17,7 @@ public class HistorialRiesgoServiceImpl implements HistorialRiesgoService {
     }
 
     @Override
-    public List<HistorialRiesgoEstudiante> obtenerHistorial(Integer idEstudiante) {
-        return repo.findByIdEstudiante(idEstudiante);
+    public List<HistorialRiesgoEstudiante> obtenerHistorial(Integer id_estudiante) {
+        return repo.buscarPorIdEstudiante(id_estudiante);
     }
 }

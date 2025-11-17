@@ -23,17 +23,17 @@ public class HorarioGrupoServiceImpl implements HorarioGrupoService {
     @Override
     public HorarioGrupo crear(HorarioGrupo h) {
 
-        if (!grupoRepo.existsById(h.getId_grupo()))
+        if (!grupoRepo.existsById(h.getIdGrupo()))
             throw new RuntimeException("El grupo no existe.");
 
-        if (h.getHora_inicio().compareTo(h.getHora_fin()) >= 0)
+        if (h.getHoraInicio().compareTo(h.getHoraFin()) >= 0)
             throw new RuntimeException("Hora inicio debe ser menor a hora fin.");
 
         List<HorarioGrupo> choque = repo.detectarChoqueSalon(
-                h.getId_salon(),
-                h.getDia_semana(),
-                h.getHora_inicio(),
-                h.getHora_fin()
+                h.getIdSalon(),
+                h.getDiaSemana(),
+                h.getHoraInicio(),
+                h.getHoraFin()
         );
 
         if (!choque.isEmpty())

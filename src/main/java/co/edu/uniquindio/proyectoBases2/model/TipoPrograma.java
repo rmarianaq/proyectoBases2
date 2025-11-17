@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,16 +14,23 @@ public class TipoPrograma {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_tipo_programa;
-    private String codigo_tipo;
-    private String nombre_tipo;
+    @Column(name = "id_tipo_programa")
+    private Integer idTipoPrograma;
+
+    @Column(name = "codigo_tipo")
+    private String codigoTipo;
+
+    @Column(name = "nombre_tipo")
+    private String nombreTipo;
+
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Builder
-    public TipoPrograma(Integer id_tipo_programa, String codigo_tipo, String nombre_tipo, String descripcion) {
-        this.id_tipo_programa = id_tipo_programa;
-        this.codigo_tipo = codigo_tipo;
-        this.nombre_tipo = nombre_tipo;
+    public TipoPrograma(Integer idTipoPrograma, String codigoTipo, String nombreTipo, String descripcion) {
+        this.idTipoPrograma = idTipoPrograma;
+        this.codigoTipo = codigoTipo;
+        this.nombreTipo = nombreTipo;
         this.descripcion = descripcion;
     }
 }

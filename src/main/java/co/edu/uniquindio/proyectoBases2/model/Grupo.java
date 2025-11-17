@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,23 +14,36 @@ public class Grupo {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_grupo;
+    @Column(name = "id_grupo")
+    private Integer idGrupo;
 
-    private Integer id_asignatura;
-    private Integer id_periodo;
-    private String numero_grupo;
-    private Integer cupo_maximo;
-    private Integer cupo_ocupado;
+    @Column(name = "id_asignatura")
+    private Integer idAsignatura;
+
+    @Column(name = "id_periodo")
+    private Integer idPeriodo;
+
+    @Column(name = "numero_grupo")
+    private String numeroGrupo;
+
+    @Column(name = "cupo_maximo")
+    private Integer cupoMaximo;
+
+    @Column(name = "cupo_ocupado")
+    private Integer cupoOcupado;
+
+    @Column(name = "activo")
     private String activo;
 
     @Builder
-    public Grupo(Integer id_grupo, Integer id_asignatura, Integer id_periodo, String numero_grupo, Integer cupo_maximo, Integer cupo_ocupado, String activo) {
-        this.id_grupo = id_grupo;
-        this.id_asignatura = id_asignatura;
-        this.id_periodo = id_periodo;
-        this.numero_grupo = numero_grupo;
-        this.cupo_maximo = cupo_maximo;
-        this.cupo_ocupado = cupo_ocupado;
+    public Grupo(Integer idGrupo, Integer idAsignatura, Integer idPeriodo,
+                 String numeroGrupo, Integer cupoMaximo, Integer cupoOcupado, String activo) {
+        this.idGrupo = idGrupo;
+        this.idAsignatura = idAsignatura;
+        this.idPeriodo = idPeriodo;
+        this.numeroGrupo = numeroGrupo;
+        this.cupoMaximo = cupoMaximo;
+        this.cupoOcupado = cupoOcupado;
         this.activo = activo;
     }
 }

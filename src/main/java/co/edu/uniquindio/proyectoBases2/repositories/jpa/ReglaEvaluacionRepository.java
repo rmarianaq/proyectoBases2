@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReglaEvaluacionRepository extends JpaRepository<ReglaEvaluacion, Integer> {
 
-    @Query("SELECT r FROM ReglaEvaluacion r WHERE r.id_grupo = :idGrupo")
+    @Query("SELECT r FROM ReglaEvaluacion r WHERE r.idGrupo = :idGrupo")
     List<ReglaEvaluacion> reglasPorGrupo(Integer idGrupo);
 
     List<ReglaEvaluacion> findByIdGrupo(Integer idGrupo);
@@ -16,7 +16,7 @@ public interface ReglaEvaluacionRepository extends JpaRepository<ReglaEvaluacion
     @Query("""
             SELECT SUM(r.porcentaje)
             FROM ReglaEvaluacion r
-            WHERE r.id_grupo = :idGrupo
+            WHERE r.idGrupo = :idGrupo
             """)
     Double sumaPorcentajes(Integer idGrupo);
 

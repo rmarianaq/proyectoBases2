@@ -10,6 +10,6 @@ public interface ProfesorGrupoRepository extends JpaRepository<ProfesorGrupo, In
 
     List<ProfesorGrupo> findByIdProfesor(Integer idProfesor);
 
-    @Query("SELECT SUM(p.horas_asignadas) FROM ProfesorGrupo p WHERE p.id_profesor = :idProfesor")
+    @Query("SELECT SUM(p.horasAsignadas) FROM ProfesorGrupo p WHERE p.idProfesor = :idProfesor")
     Integer totalHorasAsignadas(Integer idProfesor);
 }

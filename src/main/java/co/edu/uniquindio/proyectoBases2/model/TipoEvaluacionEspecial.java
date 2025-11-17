@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,18 +16,27 @@ public class TipoEvaluacionEspecial {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_tipo_evaluacion;
-    private String codigo_tipo;
-    private String nombre_tipo;
+    @Column(name = "id_tipo_evaluacion")
+    private Integer idTipoEvaluacion;
+
+    @Column(name = "codigo_tipo")
+    private String codigoTipo;
+
+    @Column(name = "nombre_tipo")
+    private String nombreTipo;
+
+    @Column(name = "descripcion")
     private String descripcion;
-    private Double costo_base;
+
+    @Column(name = "costo_base")
+    private Double costoBase;
 
     @Builder
-    public TipoEvaluacionEspecial(Integer id_tipo_evaluacion, String codigo_tipo, String nombre_tipo, String descripcion, Double costo_base) {
-        this.id_tipo_evaluacion = id_tipo_evaluacion;
-        this.codigo_tipo = codigo_tipo;
-        this.nombre_tipo = nombre_tipo;
+    public TipoEvaluacionEspecial(Integer idTipoEvaluacion, String codigoTipo, String nombreTipo, String descripcion, Double costoBase) {
+        this.idTipoEvaluacion = idTipoEvaluacion;
+        this.codigoTipo = codigoTipo;
+        this.nombreTipo = nombreTipo;
         this.descripcion = descripcion;
-        this.costo_base = costo_base;
+        this.costoBase = costoBase;
     }
 }

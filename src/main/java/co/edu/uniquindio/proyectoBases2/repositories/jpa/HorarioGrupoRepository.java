@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface HorarioGrupoRepository extends JpaRepository<HorarioGrupo, Integer> {
 
-    @Query("SELECT h FROM HorarioGrupo h WHERE h.id_grupo = :idGrupo")
+    @Query("SELECT h FROM HorarioGrupo h WHERE h.idGrupo = :idGrupo")
     List<HorarioGrupo> obtenerHorario(Integer idGrupo);
 
     List<HorarioGrupo> findByIdGrupo(Integer idGrupo);
 
     @Query("""
         SELECT h FROM HorarioGrupo h
-        WHERE h.id_salon = :idSalon
-        AND h.dia_semana = :dia
+        WHERE h.idSalon = :idSalon
+        AND h.diaSemana = :dia
         AND (
-            (h.hora_inicio <= :horaFin AND h.hora_fin >= :horaInicio)
+            (h.horaInicio <= :horaFin AND h.horaFin >= :horaInicio)
         )
     """)
     List<HorarioGrupo> detectarChoqueSalon(

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,16 +14,24 @@ public class NivelEducativo {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_nivel_educativo;
-    private String codigo_nivel;
-    private String nombre_nivel;
-    private Integer orden_nivel;
+    @Column(name = "id_nivel_educativo")
+    private Integer idNivelEducativo;
+
+    @Column(name = "codigo_nivel")
+    private String codigoNivel;
+
+    @Column(name = "nombre_nivel")
+    private String nombreNivel;
+
+    @Column(name = "orden_nivel")
+    private Integer ordenNivel;
 
     @Builder
-    public NivelEducativo(Integer id_nivel_educativo, String codigo_nivel, String nombre_nivel, Integer orden_nivel) {
-        this.id_nivel_educativo = id_nivel_educativo;
-        this.codigo_nivel = codigo_nivel;
-        this.nombre_nivel = nombre_nivel;
-        this.orden_nivel = orden_nivel;
+    public NivelEducativo(Integer idNivelEducativo, String codigoNivel, String nombreNivel, Integer ordenNivel) {
+        this.idNivelEducativo = idNivelEducativo;
+        this.codigoNivel = codigoNivel;
+        this.nombreNivel = nombreNivel;
+        this.ordenNivel = ordenNivel;
     }
 }
+

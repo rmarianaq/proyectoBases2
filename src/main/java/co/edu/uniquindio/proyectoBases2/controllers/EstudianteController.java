@@ -32,7 +32,7 @@ public class EstudianteController {
 
     @PutMapping("/{id}")
     public Estudiante actualizar(@PathVariable Integer id, @RequestBody Estudiante e) {
-        e.setId_estudiante(id);
+        e.setIdEstudiante(id);
         return service.actualizar(e);
     }
 

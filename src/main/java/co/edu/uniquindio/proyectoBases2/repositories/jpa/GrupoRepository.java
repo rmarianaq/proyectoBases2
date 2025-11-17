@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface GrupoRepository extends JpaRepository<Grupo, Integer> {
 
-    @Query("SELECT g FROM Grupo g WHERE g.id_asignatura = :idAsignatura")
+    @Query("SELECT g FROM Grupo g WHERE g.idAsignatura = :idAsignatura")
     List<Grupo> gruposPorAsignatura(Integer idAsignatura);
 }

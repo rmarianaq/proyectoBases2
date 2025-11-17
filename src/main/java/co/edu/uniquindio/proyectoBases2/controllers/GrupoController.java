@@ -48,7 +48,7 @@ public class GrupoController {
             @PathVariable Integer idGrupo,
             @RequestBody HorarioGrupo h) {
 
-        h.setId_grupo(idGrupo);
+        h.setIdGrupo(idGrupo);
         return horarioGrupoService.crear(h);
     }
 
@@ -57,7 +57,7 @@ public class GrupoController {
             @PathVariable Integer idGrupo,
             @RequestBody ProfesorGrupo pg) {
 
-        pg.setId_grupo(idGrupo);
+        pg.setIdGrupo(idGrupo);
         return profesorGrupoService.asignar(pg);
     }
 }

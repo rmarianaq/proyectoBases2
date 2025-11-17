@@ -38,12 +38,12 @@ public class RiesgoAcademicoServiceImpl implements RiesgoAcademicoService {
             nivel = nivelRepo.findById(1).get(); // bajo
 
         HistorialRiesgoEstudiante h = HistorialRiesgoEstudiante.builder()
-                .id_estudiante(idEst)
-                .id_nivel_riesgo(nivel.getId_nivel_riesgo())
-                .id_periodo(idPeriodo)
-                .fecha_asignacion(LocalDateTime.now())
-                .promedio_periodo(promedio)
-                .materias_perdidas(perdidas)
+                .idEstudiante(idEst)
+                .idNivelRiesgo(nivel.getIdNivelRiesgo())
+                .idPeriodo(idPeriodo)
+                .fechaAsignacion(LocalDateTime.now())
+                .promedioPeriodo(promedio)
+                .materiasPerdidas(perdidas)
                 .build();
 
         return historialRepo.save(h);

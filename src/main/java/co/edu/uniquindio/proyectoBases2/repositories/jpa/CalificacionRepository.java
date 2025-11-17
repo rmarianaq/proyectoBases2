@@ -10,8 +10,8 @@ public interface CalificacionRepository extends JpaRepository<Calificacion, Inte
     @Query("""
             SELECT SUM(c.nota * r.porcentaje / 100)
             FROM Calificacion c
-            JOIN ReglaEvaluacion r ON c.id_regla = r.id_regla
-            WHERE c.id_matricula_detalle = :idDetalle
+            JOIN ReglaEvaluacion r ON c.idRegla = r.idRegla
+            WHERE c.idMatriculaDetalle = :idDetalle
             """)
     Double calcularDefinitiva(Integer idDetalle);
 }

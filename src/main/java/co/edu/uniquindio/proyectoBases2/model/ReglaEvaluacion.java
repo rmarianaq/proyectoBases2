@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,25 +16,40 @@ public class ReglaEvaluacion {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_regla;
+    @Column(name = "id_regla")
+    private Integer idRegla;
 
-    private Integer id_grupo;
-    private String nombre_item;
+    @Column(name = "id_grupo")
+    private Integer idGrupo;
+
+    @Column(name = "nombre_item")
+    private String nombreItem;
+
+    @Column(name = "porcentaje")
     private Double porcentaje;
-    private Integer orden_item;
-    private LocalDateTime fecha_inicio;
-    private LocalDateTime fecha_fin;
+
+    @Column(name = "orden_item")
+    private Integer ordenItem;
+
+    @Column(name = "fecha_inicio")
+    private LocalDateTime fechaInicio;
+
+    @Column(name = "fecha_fin")
+    private LocalDateTime fechaFin;
+
+    @Column(name = "activa")
     private String activa;
 
     @Builder
-    public ReglaEvaluacion(Integer id_regla, Integer id_grupo, String nombre_item, Double porcentaje, Integer orden_item, LocalDateTime fecha_inicio, LocalDateTime fecha_fin, String activa) {
-        this.id_regla = id_regla;
-        this.id_grupo = id_grupo;
-        this.nombre_item = nombre_item;
+    public ReglaEvaluacion(Integer idRegla, Integer idGrupo, String nombreItem, Double porcentaje, Integer ordenItem,
+                           LocalDateTime fechaInicio, LocalDateTime fechaFin, String activa) {
+        this.idRegla = idRegla;
+        this.idGrupo = idGrupo;
+        this.nombreItem = nombreItem;
         this.porcentaje = porcentaje;
-        this.orden_item = orden_item;
-        this.fecha_inicio = fecha_inicio;
-        this.fecha_fin = fecha_fin;
+        this.ordenItem = ordenItem;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.activa = activa;
     }
 }

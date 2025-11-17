@@ -24,13 +24,13 @@ public class ProfesorGrupoServiceImpl implements ProfesorGrupoService {
     @Override
     public ProfesorGrupo asignar(ProfesorGrupo pg) {
 
-        Profesor profesor = profesorRepo.findById(pg.getId_profesor())
+        Profesor profesor = profesorRepo.findById(pg.getIdProfesor())
                 .orElseThrow(() -> new RuntimeException("Profesor no encontrado"));
 
-        Integer horasActuales = repo.totalHorasAsignadas(pg.getId_profesor());
+        Integer horasActuales = repo.totalHorasAsignadas(pg.getIdProfesor());
         if (horasActuales == null) horasActuales = 0;
 
-        if (horasActuales + pg.getHoras_asignadas() > profesor.getHoras_maximas())
+        if (horasActuales + pg.getHorasAsignadas() > profesor.getHorasMaximas())
             throw new RuntimeException("Supera horas máximas del profesor.");
 
         return repo.save(pg);

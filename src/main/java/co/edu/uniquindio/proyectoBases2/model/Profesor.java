@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,31 +16,53 @@ public class Profesor {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_profesor;
-    private String documento_identidad;
+    @Column(name = "id_profesor")
+    private Integer idProfesor;
 
-    private Integer id_tipo_documento;
+    @Column(name = "documento_identidad")
+    private String documentoIdentidad;
+
+    @Column(name = "id_tipo_documento")
+    private Integer idTipoDocumento;
+
+    @Column(name = "nombres")
     private String nombres;
+
+    @Column(name = "apellidos")
     private String apellidos;
-    private String email_institucional;
+
+    @Column(name = "email_institucional")
+    private String emailInstitucional;
+
+    @Column(name = "telefono")
     private String telefono;
-    private LocalDateTime fecha_vinculacion;
-    private Integer horas_minimas;
-    private Integer horas_maximas;
+
+    @Column(name = "fecha_vinculacion")
+    private LocalDateTime fechaVinculacion;
+
+    @Column(name = "horas_minimas")
+    private Integer horasMinimas;
+
+    @Column(name = "horas_maximas")
+    private Integer horasMaximas;
+
+    @Column(name = "activo")
     private String activo;
 
     @Builder
-    public Profesor(Integer id_profesor, String documento_identidad, Integer id_tipo_documento, String nombres, String apellidos, String email_institucional, String telefono, LocalDateTime fecha_vinculacion, Integer horas_minimas, Integer horas_maximas, String activo) {
-        this.id_profesor = id_profesor;
-        this.documento_identidad = documento_identidad;
-        this.id_tipo_documento = id_tipo_documento;
+    public Profesor(Integer idProfesor, String documentoIdentidad, Integer idTipoDocumento, String nombres,
+                    String apellidos, String emailInstitucional, String telefono,
+                    LocalDateTime fechaVinculacion, Integer horasMinimas, Integer horasMaximas, String activo) {
+        this.idProfesor = idProfesor;
+        this.documentoIdentidad = documentoIdentidad;
+        this.idTipoDocumento = idTipoDocumento;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.email_institucional = email_institucional;
+        this.emailInstitucional = emailInstitucional;
         this.telefono = telefono;
-        this.fecha_vinculacion = fecha_vinculacion;
-        this.horas_minimas = horas_minimas;
-        this.horas_maximas = horas_maximas;
+        this.fechaVinculacion = fechaVinculacion;
+        this.horasMinimas = horasMinimas;
+        this.horasMaximas = horasMaximas;
         this.activo = activo;
     }
 }

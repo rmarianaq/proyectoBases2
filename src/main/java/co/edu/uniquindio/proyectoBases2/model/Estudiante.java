@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -15,40 +16,73 @@ public class Estudiante {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_estudiante;
-    private String codigo_estudiante;
-    private String documento_identidad;
+    @Column(name = "id_estudiante")
+    private Integer idEstudiante;
 
-    private Integer id_tipo_documento;
+    @Column(name = "codigo_estudiante")
+    private String codigoEstudiante;
+
+    @Column(name = "documento_identidad")
+    private String documentoIdentidad;
+
+    @Column(name = "id_tipo_documento")
+    private Integer idTipoDocumento;
+
+    @Column(name = "nombres")
     private String nombres;
-    private String apellidos;
-    private String email_institucional;
-    private String telefono;
-    private LocalDateTime fecha_ingreso;
 
-    private Integer id_programa;
-    private Integer id_sede;
-    private Integer creditos_aprobados;
-    private Double promedio_acumulado;
-    private Integer semestre_actual;
+    @Column(name = "apellidos")
+    private String apellidos;
+
+    @Column(name = "email_institucional")
+    private String emailInstitucional;
+
+    @Column(name = "telefono")
+    private String telefono;
+
+    @Column(name = "fecha_ingreso")
+    private LocalDateTime fechaIngreso;
+
+    @Column(name = "id_programa")
+    private Integer idPrograma;
+
+    @Column(name = "id_sede")
+    private Integer idSede;
+
+    @Column(name = "creditos_aprobados")
+    private Integer creditosAprobados;
+
+    @Column(name = "promedio_acumulado")
+    private Double promedioAcumulado;
+
+    @Column(name = "semestre_actual")
+    private Integer semestreActual;
+
+    @Column(name = "activo")
     private String activo;
 
     @Builder
-    public Estudiante(Integer id_estudiante, String codigo_estudiante, String documento_identidad, Integer id_tipo_documento, String nombres, String apellidos, String email_institucional, String telefono, LocalDateTime fecha_ingreso, Integer id_programa, Integer id_sede, Integer creditos_aprobados, Double promedio_acumulado, Integer semestre_actual, String activo) {
-        this.id_estudiante = id_estudiante;
-        this.codigo_estudiante = codigo_estudiante;
-        this.documento_identidad = documento_identidad;
-        this.id_tipo_documento = id_tipo_documento;
+    public Estudiante(Integer idEstudiante, String codigoEstudiante, String documentoIdentidad,
+                      Integer idTipoDocumento, String nombres, String apellidos,
+                      String emailInstitucional, String telefono, LocalDateTime fechaIngreso,
+                      Integer idPrograma, Integer idSede, Integer creditosAprobados,
+                      Double promedioAcumulado, Integer semestreActual, String activo) {
+
+        this.idEstudiante = idEstudiante;
+        this.codigoEstudiante = codigoEstudiante;
+        this.documentoIdentidad = documentoIdentidad;
+        this.idTipoDocumento = idTipoDocumento;
         this.nombres = nombres;
         this.apellidos = apellidos;
-        this.email_institucional = email_institucional;
+        this.emailInstitucional = emailInstitucional;
         this.telefono = telefono;
-        this.fecha_ingreso = fecha_ingreso;
-        this.id_programa = id_programa;
-        this.id_sede = id_sede;
-        this.creditos_aprobados = creditos_aprobados;
-        this.promedio_acumulado = promedio_acumulado;
-        this.semestre_actual = semestre_actual;
+        this.fechaIngreso = fechaIngreso;
+        this.idPrograma = idPrograma;
+        this.idSede = idSede;
+        this.creditosAprobados = creditosAprobados;
+        this.promedioAcumulado = promedioAcumulado;
+        this.semestreActual = semestreActual;
         this.activo = activo;
     }
 }
+

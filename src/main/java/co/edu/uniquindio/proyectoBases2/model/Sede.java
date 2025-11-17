@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,21 +14,31 @@ public class Sede {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_sede;
-    private String nombre_sede;
+    @Column(name = "id_sede")
+    private Integer idSede;
+
+    @Column(name = "nombre_sede")
+    private String nombreSede;
+
+    @Column(name = "direccion")
     private String direccion;
+
+    @Column(name = "telefono")
     private String telefono;
 
-    private Integer id_municipio;
+    @Column(name = "id_municipio")
+    private Integer idMunicipio;
+
+    @Column(name = "activa")
     private String activa;
 
     @Builder
-    public Sede(Integer id_sede, String nombre_sede, String direccion, String telefono, Integer id_municipio, String activa) {
-        this.id_sede = id_sede;
-        this.nombre_sede = nombre_sede;
+    public Sede(Integer idSede, String nombreSede, String direccion, String telefono, Integer idMunicipio, String activa) {
+        this.idSede = idSede;
+        this.nombreSede = nombreSede;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.id_municipio = id_municipio;
+        this.idMunicipio = idMunicipio;
         this.activa = activa;
     }
 }

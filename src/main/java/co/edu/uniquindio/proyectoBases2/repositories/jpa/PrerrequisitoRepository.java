@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PrerrequisitoRepository extends JpaRepository<Prerrequisito, Integer> {
 
-    @Query("SELECT p.id_asignatura_prerequisito FROM Prerrequisito p WHERE p.id_asignatura = :idAsignatura")
+    @Query("SELECT p.idAsignaturaPrerequisito FROM Prerrequisito p WHERE p.idAsignatura = :idAsignatura")
     List<Integer> findPrerrequisitos(Integer idAsignatura);
 }

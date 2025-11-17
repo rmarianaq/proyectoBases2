@@ -11,22 +11,22 @@ public interface MatriculaDetalleRepository extends JpaRepository<MatriculaDetal
     @Query("""
             SELECT COUNT(md)
             FROM MatriculaDetalle md
-            WHERE md.id_grupo = :idGrupo
+            WHERE md.idGrupo = :idGrupo
             """)
     Integer contarInscritos(Integer idGrupo);
 
     @Query("""
             SELECT SUM(a.creditos)
             FROM MatriculaDetalle md
-            JOIN Grupo g ON md.id_grupo = g.id_grupo
-            JOIN Asignatura a ON g.id_asignatura = a.id_asignatura
-            WHERE md.id_matricula = :idMatricula
+            JOIN Grupo g ON md.idGrupo = g.idGrupo
+            JOIN Asignatura a ON g.idAsignatura = a.idAsignatura
+            WHERE md.idMatricula = :idMatricula
             """)
     Integer totalCreditos(Integer idMatricula);
 
     @Query("""
             SELECT md FROM MatriculaDetalle md
-            WHERE md.id_matricula = :idMatricula
+            WHERE md.idMatricula = :idMatricula
             """)
     List<MatriculaDetalle> detalles(Integer idMatricula);
 }

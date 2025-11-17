@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -13,17 +14,24 @@ public class ProfesorGrupo {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_profesor;
+    @Column(name = "id_profesor")
+    private Integer idProfesor;
+
     @EqualsAndHashCode.Include
-    private Integer id_grupo;
-    private String tipo_participacion;
-    private Integer horas_asignadas;
+    @Column(name = "id_grupo")
+    private Integer idGrupo;
+
+    @Column(name = "tipo_participacion")
+    private String tipoParticipacion;
+
+    @Column(name = "horas_asignadas")
+    private Integer horasAsignadas;
 
     @Builder
-    public ProfesorGrupo(Integer id_profesor, Integer id_grupo, String tipo_participacion, Integer horas_asignadas) {
-        this.id_profesor = id_profesor;
-        this.id_grupo = id_grupo;
-        this.tipo_participacion = tipo_participacion;
-        this.horas_asignadas = horas_asignadas;
+    public ProfesorGrupo(Integer idProfesor, Integer idGrupo, String tipoParticipacion, Integer horasAsignadas) {
+        this.idProfesor = idProfesor;
+        this.idGrupo = idGrupo;
+        this.tipoParticipacion = tipoParticipacion;
+        this.horasAsignadas = horasAsignadas;
     }
 }

@@ -29,7 +29,7 @@ public class ProgramaController {
 
     @PutMapping("/{id}")
     public Programa actualizar(@PathVariable Integer id, @RequestBody Programa p) {
-        p.setId_programa(id);
+        p.setIdPrograma(id);
         return service.actualizar(p);
     }
 

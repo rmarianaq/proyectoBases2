@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -14,25 +15,40 @@ public class Programa {
 
     @Id
     @EqualsAndHashCode.Include
-    private Integer id_programa;
-    private String codigo_programa;
-    private String nombre_programa;
-    private Integer creditos_totales;
+    @Column(name = "id_programa")
+    private Integer idPrograma;
 
-    private Integer id_tipo_programa;
-    private Integer id_facultad;
-    private Integer duracion_semestres;
+    @Column(name = "codigo_programa")
+    private String codigoPrograma;
+
+    @Column(name = "nombre_programa")
+    private String nombrePrograma;
+
+    @Column(name = "creditos_totales")
+    private Integer creditosTotales;
+
+    @Column(name = "id_tipo_programa")
+    private Integer idTipoPrograma;
+
+    @Column(name = "id_facultad")
+    private Integer idFacultad;
+
+    @Column(name = "duracion_semestres")
+    private Integer duracionSemestres;
+
+    @Column(name = "activo")
     private String activo;
 
     @Builder
-    public Programa(Integer id_programa, String codigo_programa, String nombre_programa, Integer creditos_totales, Integer id_tipo_programa, Integer id_facultad, Integer duracion_semestres, String activo) {
-        this.id_programa = id_programa;
-        this.codigo_programa = codigo_programa;
-        this.nombre_programa = nombre_programa;
-        this.creditos_totales = creditos_totales;
-        this.id_tipo_programa = id_tipo_programa;
-        this.id_facultad = id_facultad;
-        this.duracion_semestres = duracion_semestres;
+    public Programa(Integer idPrograma, String codigoPrograma, String nombrePrograma, Integer creditosTotales,
+                    Integer idTipoPrograma, Integer idFacultad, Integer duracionSemestres, String activo) {
+        this.idPrograma = idPrograma;
+        this.codigoPrograma = codigoPrograma;
+        this.nombrePrograma = nombrePrograma;
+        this.creditosTotales = creditosTotales;
+        this.idTipoPrograma = idTipoPrograma;
+        this.idFacultad = idFacultad;
+        this.duracionSemestres = duracionSemestres;
         this.activo = activo;
     }
 }

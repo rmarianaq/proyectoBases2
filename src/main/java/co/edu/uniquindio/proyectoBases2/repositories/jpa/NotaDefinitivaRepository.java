@@ -12,14 +12,14 @@ public interface NotaDefinitivaRepository extends JpaRepository<NotaDefinitiva, 
     @Query("""
     SELECT CASE WHEN n.aprobada = 'S' THEN TRUE ELSE FALSE END
     FROM NotaDefinitiva n
-    WHERE n.id_asignatura = :idAsignatura
-    AND n.id_matricula_detalle IN (
-        SELECT md.id_matricula_detalle
+    WHERE n.idAsignatura = :idAsignatura
+    AND n.idMatriculaDetalle IN (
+        SELECT md.idMatriculaDetalle
         FROM MatriculaDetalle md
-        WHERE md.id_matricula IN (
-            SELECT m.id_matricula
+        WHERE md.idMatricula IN (
+            SELECT m.idMatricula
             FROM Matricula m
-            WHERE m.id_estudiante = :idEstudiante
+            WHERE m.idEstudiante = :idEstudiante
         )
     )
 """)
@@ -27,17 +27,17 @@ public interface NotaDefinitivaRepository extends JpaRepository<NotaDefinitiva, 
 
 
     @Query("""
-    SELECT n.id_asignatura
+    SELECT n.idAsignatura
     FROM NotaDefinitiva n
     WHERE n.aprobada = 'N'
-    AND n.id_matricula_detalle IN (
-        SELECT md.id_matricula_detalle
+    AND n.idMatriculaDetalle IN (
+        SELECT md.idMatriculaDetalle
         FROM MatriculaDetalle md
-        WHERE md.id_matricula IN (
-            SELECT m.id_matricula
+        WHERE md.idMatricula IN (
+            SELECT m.idMatricula
             FROM Matricula m
-            WHERE m.id_estudiante = :idEstudiante
-            AND m.id_periodo = :idPeriodo
+            WHERE m.idEstudiante = :idEstudiante
+            AND m.idPeriodo = :idPeriodo
         )
     )
 """)

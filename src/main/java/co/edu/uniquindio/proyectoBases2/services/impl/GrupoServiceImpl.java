@@ -28,7 +28,7 @@ public class GrupoServiceImpl implements GrupoService {
 
     public boolean tieneCupo(Integer idGrupo){
         Grupo g = obtener(idGrupo);
-        return g.getCupo_ocupado() < g.getCupo_maximo();
+        return g.getCupoOcupado() < g.getCupoMaximo();
     }
 
     public boolean hayChoque(Integer g1, Integer g2){
@@ -38,8 +38,8 @@ public class GrupoServiceImpl implements GrupoService {
         // choque simplificado
         for(var a: h1){
             for(var b: h2){
-                if(a.getDia_semana().equals(b.getDia_semana())){
-                    if(a.getHora_inicio().equals(b.getHora_inicio())){
+                if(a.getDiaSemana().equals(b.getDiaSemana())){
+                    if(a.getHoraInicio().equals(b.getHoraInicio())){
                         return true;
                     }
                 }
