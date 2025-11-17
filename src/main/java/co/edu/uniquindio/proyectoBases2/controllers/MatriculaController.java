@@ -10,22 +10,32 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class MatriculaController {
 
-    private final MatriculaService service;
+    private final MatriculaService matriculaService;
 
-    public MatriculaController(MatriculaService service) {
-        this.service = service;
+    public MatriculaController(MatriculaService matriculaService) {
+        this.matriculaService = matriculaService;
     }
 
-    @PostMapping
-    public Matricula crear(@RequestBody Matricula m) {
-        return service.crear(m);
+    @PostMapping("/crear")
+    public ResponseEntity<Matricula> crear(@RequestBody Matricula m) {
+        return ResponseEntity.ok(matriculaService.crearMatricula(m));
     }
 
     @PostMapping("/{idMatricula}/agregar/{idGrupo}")
-    public ResponseEntity<String> agregarAsignatura(
+    public ResponseEntity<String> agregar(
             @PathVariable Integer idMatricula,
-            @PathVariable Integer idGrupo) {
-        return ResponseEntity.ok(service.agregarAsignatura(idMatricula, idGrupo));
+            @PathVariable Integer idGrupo
+    ) {
+        return ResponseEntity.ok(matriculaService.agregarAsignatura(idMatricula, idGrupo));
+    }
+
+    @GetMapping("/limite-creditos")
+    public ResponseEntity<Integer> limite(
+            @RequestParam Integer idEstudiante,
+            @RequestParam Integer idPeriodo
+    ) {
+        return ResponseEntity.ok(matriculaService.obtenerLimiteCreditos(idEstudiante, idPeriodo));
     }
 }
+
 

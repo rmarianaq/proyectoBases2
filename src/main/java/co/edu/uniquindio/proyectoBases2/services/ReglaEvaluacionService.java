@@ -1,8 +1,8 @@
 package co.edu.uniquindio.proyectoBases2.services;
 
 import co.edu.uniquindio.proyectoBases2.model.ReglaEvaluacion;
-import co.edu.uniquindio.proyectoBases2.repositories.GrupoRepository;
-import co.edu.uniquindio.proyectoBases2.repositories.ReglaEvaluacionRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.GrupoRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.ReglaEvaluacionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

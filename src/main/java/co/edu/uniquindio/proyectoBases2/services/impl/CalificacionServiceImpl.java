@@ -2,8 +2,8 @@ package co.edu.uniquindio.proyectoBases2.services.impl;
 
 import co.edu.uniquindio.proyectoBases2.model.Calificacion;
 import co.edu.uniquindio.proyectoBases2.model.NotaDefinitiva;
-import co.edu.uniquindio.proyectoBases2.repositories.CalificacionRepository;
-import co.edu.uniquindio.proyectoBases2.repositories.NotaDefinitivaRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.CalificacionRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.NotaDefinitivaRepository;
 import co.edu.uniquindio.proyectoBases2.services.CalificacionService;
 import org.springframework.stereotype.Service;
 

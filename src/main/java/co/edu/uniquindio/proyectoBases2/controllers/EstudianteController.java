@@ -1,8 +1,9 @@
 package co.edu.uniquindio.proyectoBases2.controllers;
 
 import co.edu.uniquindio.proyectoBases2.model.Estudiante;
+import co.edu.uniquindio.proyectoBases2.model.HistorialRiesgoEstudiante;
 import co.edu.uniquindio.proyectoBases2.services.EstudianteService;
-import org.springframework.http.ResponseEntity;
+import co.edu.uniquindio.proyectoBases2.services.HistorialRiesgoService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.List;
 public class EstudianteController {
 
     private final EstudianteService service;
+    private final HistorialRiesgoService historialRiesgoService;
 
-    public EstudianteController(EstudianteService service) {
+    public EstudianteController(EstudianteService service, HistorialRiesgoService historialRiesgoService) {
         this.service = service;
+        this.historialRiesgoService = historialRiesgoService;
     }
 
     @GetMapping
@@ -31,6 +34,11 @@ public class EstudianteController {
     public Estudiante actualizar(@PathVariable Integer id, @RequestBody Estudiante e) {
         e.setId_estudiante(id);
         return service.actualizar(e);
+    }
+
+    @GetMapping("/{id}/riesgo")
+    public List<HistorialRiesgoEstudiante> riesgo(@PathVariable Integer id) {
+        return historialRiesgoService.obtenerHistorial(id);
     }
 }
 

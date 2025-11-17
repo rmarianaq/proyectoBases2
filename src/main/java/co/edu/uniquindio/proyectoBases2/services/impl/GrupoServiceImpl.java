@@ -1,17 +1,12 @@
 package co.edu.uniquindio.proyectoBases2.services.impl;
 
-import co.edu.uniquindio.proyectoBases2.exceptions.BusinessException;
 import co.edu.uniquindio.proyectoBases2.model.Grupo;
-import co.edu.uniquindio.proyectoBases2.model.HorarioGrupo;
-import co.edu.uniquindio.proyectoBases2.model.Salon;
-import co.edu.uniquindio.proyectoBases2.repositories.GrupoRepository;
-import co.edu.uniquindio.proyectoBases2.repositories.HorarioGrupoRepository;
-import co.edu.uniquindio.proyectoBases2.repositories.MatriculaDetalleRepository;
-import co.edu.uniquindio.proyectoBases2.repositories.SalonRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.GrupoRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.HorarioGrupoRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.MatriculaDetalleRepository;
 import co.edu.uniquindio.proyectoBases2.services.GrupoService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalTime;
 import java.util.List;
 
 @Service

@@ -17,6 +17,7 @@ public class NotaDefinitiva {
     @EqualsAndHashCode.Include
     private Integer id_nota_definitiva;
 
+    private Integer id_asignatura;
     private Integer id_matricula_detalle;
     private Double nota_definitiva;
     private String aprobada;
@@ -24,8 +25,9 @@ public class NotaDefinitiva {
     private String consolidada;
 
     @Builder
-    public NotaDefinitiva(Integer id_nota_definitiva, Integer id_matricula_detalle, Double nota_definitiva, String aprobada, LocalDateTime fecha_calculo, String consolidada) {
+    public NotaDefinitiva(Integer id_nota_definitiva, Integer id_asignatura, Integer id_matricula_detalle, Double nota_definitiva, String aprobada, LocalDateTime fecha_calculo, String consolidada) {
         this.id_nota_definitiva = id_nota_definitiva;
+        this.id_asignatura = id_asignatura;
         this.id_matricula_detalle = id_matricula_detalle;
         this.nota_definitiva = nota_definitiva;
         this.aprobada = aprobada;

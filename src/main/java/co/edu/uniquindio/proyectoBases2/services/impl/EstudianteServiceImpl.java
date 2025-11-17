@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.services.impl;
 
 import co.edu.uniquindio.proyectoBases2.model.Estudiante;
-import co.edu.uniquindio.proyectoBases2.repositories.EstudianteRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.EstudianteRepository;
 import co.edu.uniquindio.proyectoBases2.services.EstudianteService;
 import org.springframework.stereotype.Service;
 

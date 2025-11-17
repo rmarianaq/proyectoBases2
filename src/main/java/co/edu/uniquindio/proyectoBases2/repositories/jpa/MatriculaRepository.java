@@ -1,6 +1,5 @@
-package co.edu.uniquindio.proyectoBases2.repositories;
+package co.edu.uniquindio.proyectoBases2.repositories.jpa;
 
-import co.edu.uniquindio.proyectoBases2.model.Grupo;
 import co.edu.uniquindio.proyectoBases2.model.Matricula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

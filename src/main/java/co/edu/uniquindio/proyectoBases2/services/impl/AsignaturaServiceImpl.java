@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.services.impl;
 
 import co.edu.uniquindio.proyectoBases2.model.Asignatura;
-import co.edu.uniquindio.proyectoBases2.repositories.AsignaturaRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.AsignaturaRepository;
 import co.edu.uniquindio.proyectoBases2.services.AsignaturaService;
 import org.springframework.stereotype.Service;
 

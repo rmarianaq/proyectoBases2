@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyectoBases2.services.impl;
 
 import co.edu.uniquindio.proyectoBases2.model.Programa;
-import co.edu.uniquindio.proyectoBases2.repositories.ProgramaRepository;
+import co.edu.uniquindio.proyectoBases2.repositories.jpa.ProgramaRepository;
 import co.edu.uniquindio.proyectoBases2.services.ProgramaService;
 import org.springframework.stereotype.Service;
 
