@@ -1,32 +1,38 @@
 package co.edu.uniquindio.proyectoBases2.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "comentarios")
+@Entity
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Comentario {
 
     @Id
-    @EqualsAndHashCode.Include
-    private String idComentario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comentario")
+    private Integer idComentario;
 
-    private String idPeriodo;
-    private String idAsignatura;
-    private String comentario;
+    @Column(name = "id_matricula_detalle")
+    private Integer idMatriculaDetalle;
+
+    @Column(name = "id_comentario_nosql")
+    private String idComentarioNosql;
+
+    @Column(name = "migrado_nosql")
+    private String migradoNosql;
+
+    @Column(name = "anonimo")
+    private String anonimo;
 
     @Builder
-    public Comentario(String idComentario, String idPeriodo, String idAsignatura, String comentario) {
+    public Comentario(Integer idComentario, Integer idMatriculaDetalle, String idComentarioNosql, String migradoNosql, String anonimo) {
         this.idComentario = idComentario;
-        this.idPeriodo = idPeriodo;
-        this.idAsignatura = idAsignatura;
-        this.comentario = comentario;
+        this.idMatriculaDetalle = idMatriculaDetalle;
+        this.idComentarioNosql = idComentarioNosql;
+        this.migradoNosql = migradoNosql;
+        this.anonimo = anonimo;
     }
 }
-

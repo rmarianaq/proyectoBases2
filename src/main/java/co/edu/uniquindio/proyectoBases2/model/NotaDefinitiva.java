@@ -19,9 +19,6 @@ public class NotaDefinitiva {
     @Column(name = "id_nota_definitiva")
     private Integer idNotaDefinitiva;
 
-    @Column(name = "id_asignatura")
-    private Integer idAsignatura;
-
     @Column(name = "id_matricula_detalle")
     private Integer idMatriculaDetalle;
 
@@ -38,11 +35,10 @@ public class NotaDefinitiva {
     private String consolidada;
 
     @Builder
-    public NotaDefinitiva(Integer idNotaDefinitiva, Integer idAsignatura, Integer idMatriculaDetalle,
+    public NotaDefinitiva(Integer idNotaDefinitiva, Integer idMatriculaDetalle,
                           Double notaDefinitiva, String aprobada, LocalDateTime fechaCalculo,
                           String consolidada) {
         this.idNotaDefinitiva = idNotaDefinitiva;
-        this.idAsignatura = idAsignatura;
         this.idMatriculaDetalle = idMatriculaDetalle;
         this.notaDefinitiva = notaDefinitiva;
         this.aprobada = aprobada;

@@ -10,39 +10,32 @@ import java.util.List;
 public interface NotaDefinitivaRepository extends JpaRepository<NotaDefinitiva, Integer> {
 
     @Query("""
-    SELECT CASE WHEN n.aprobada = 'S' THEN TRUE ELSE FALSE END
-    FROM NotaDefinitiva n
-    WHERE n.idAsignatura = :idAsignatura
-    AND n.idMatriculaDetalle IN (
-        SELECT md.idMatriculaDetalle
-        FROM MatriculaDetalle md
-        WHERE md.idMatricula IN (
-            SELECT m.idMatricula
-            FROM Matricula m
+        SELECT CASE WHEN n.aprobada = 'S' THEN TRUE ELSE FALSE END
+        FROM NotaDefinitiva n
+        WHERE n.idMatriculaDetalle IN (
+            SELECT md.idMatriculaDetalle
+            FROM MatriculaDetalle md
+            JOIN Grupo g ON g.idGrupo = md.idGrupo
+            JOIN Matricula m ON m.idMatricula = md.idMatricula
             WHERE m.idEstudiante = :idEstudiante
+            AND g.idAsignatura = :idAsignatura
         )
-    )
-""")
+    """)
     Boolean aproboAsignatura(Integer idEstudiante, Integer idAsignatura);
 
 
     @Query("""
-    SELECT n.idAsignatura
-    FROM NotaDefinitiva n
-    WHERE n.aprobada = 'N'
-    AND n.idMatriculaDetalle IN (
-        SELECT md.idMatriculaDetalle
-        FROM MatriculaDetalle md
-        WHERE md.idMatricula IN (
-            SELECT m.idMatricula
-            FROM Matricula m
-            WHERE m.idEstudiante = :idEstudiante
-            AND m.idPeriodo = :idPeriodo
-        )
-    )
-""")
+        SELECT g.idAsignatura
+        FROM NotaDefinitiva n
+        JOIN MatriculaDetalle md ON md.idMatriculaDetalle = n.idMatriculaDetalle
+        JOIN Grupo g ON g.idGrupo = md.idGrupo
+        JOIN Matricula m ON m.idMatricula = md.idMatricula
+        WHERE n.aprobada = 'N'
+        AND m.idEstudiante = :idEstudiante
+        AND m.idPeriodo = :idPeriodo
+    """)
     List<Integer> obtenerReprobadas(Integer idEstudiante, Integer idPeriodo);
 
-
 }
+
 
